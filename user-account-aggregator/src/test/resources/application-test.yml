@@ -1,0 +1,5 @@
+
+server:
+  port: 9090
+  baseURI: http://localhost
+  basePath: /aggregator

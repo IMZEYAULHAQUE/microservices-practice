@@ -1,0 +1,29 @@
+server:
+  port: 9090
+  servlet:
+    context-path: /aggregator
+
+spring:
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+  mvc:
+    throw-exception-if-no-handler-found: true
+  resources:
+    add-mappings: false
+    #Above both property setting should go together. 
+    #by default Spring maps unknown urls to /**, so there really never is "no handler found". To disable the unknown url mapping to /**, you need
+    
+logging:
+  level:
+    org:
+      hibernate: ERROR
+
+feign:
+  client:
+    user:
+      url: http://user-service
+    account:
+      url: http://account-service
+#  hystrix:
+#    enabled: true
