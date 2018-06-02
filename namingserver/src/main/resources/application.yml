@@ -1,0 +1,26 @@
+
+server:
+  port: 8761
+  
+  
+spring:
+  application:
+    name: pnc-assignment-ns
+
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+  instance:
+    hostname: pnc-assignment-ns
+    
+    
+    
+logging:
+  level:
+    com:
+      netflix:
+        eureka: OFF
+        discovery: OFF
