@@ -1,0 +1,9 @@
+GET /accounts
+GET /accounts/{accountId}
+GET /users/{userId}/accounts
+GET /users/{userId}/accounts/{account}
+PUT /users/{userId}/accounts/{accountId}/balance 
+PUT /users/{userId}/accounts/{accountId}/status
+PUT /users/{userId}/accounts/{accountId}/type
+PATCH /users/{userId}/accounts/{accountId}
+DELETE /users/{userId}/accounts/{accountId}
