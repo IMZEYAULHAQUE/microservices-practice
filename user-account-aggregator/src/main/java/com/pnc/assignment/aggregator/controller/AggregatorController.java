@@ -24,6 +24,8 @@ public class AggregatorController {
    @Autowired
    private AccountFeignClient accountClient;
 
+
+   //@TODO all these logic should move to service layer
    @GetMapping("/users")
    public List<User> findAllUsers() {
       List<User> users = userClient.findAll().getData();

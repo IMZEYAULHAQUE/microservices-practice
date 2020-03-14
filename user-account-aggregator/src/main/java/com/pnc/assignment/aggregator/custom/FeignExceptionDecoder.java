@@ -43,7 +43,7 @@ public class FeignExceptionDecoder implements ErrorDecoder {
                 //throw ((Exception)Class.forName("com.pnc.assignment.aggregator.exception." + exceptionClassName).newInstance());
              }
              else {
-                throw new RuntimeException(exceptionClassName + " exception occured.");
+                throw new RuntimeException(exceptionClassName + " exception occurred.");
              }
           }
           else if (exception.getData() instanceof String) {
