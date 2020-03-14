@@ -1,52 +1,53 @@
-buildscript {
-	ext {
-		springBootVersion = '2.0.1.RELEASE'
-		spockVersion = '1.1-groovy-2.4'
-	}
-	repositories {
-		mavenCentral()
-	}
-	dependencies {
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-	}
+plugins {
+	id 'org.springframework.boot' version '2.2.5.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+	id 'java'
 }
-
-apply plugin: 'java'
-apply plugin: 'eclipse'
-apply plugin: 'org.springframework.boot'
-apply plugin: 'io.spring.dependency-management'
-
 group = 'com.pnc.assignment'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = 1.8
-
+sourceCompatibility = '1.8'
+configurations {
+	developmentOnly
+	runtimeClasspath {
+		extendsFrom developmentOnly
+	}
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
 repositories {
 	mavenCentral()
-	maven { url "https://repo.spring.io/milestone" }
 }
-
-
 ext {
-	springCloudVersion = 'Finchley.M9'
+	set('springCloudVersion', "Hoxton.SR3")
+	set('spockVersion', "2.0-M2-groovy-3.0")
+	set('restAssuredVersion', "4.2.0")
 }
-
 dependencies {
-	compile('org.springframework.boot:spring-boot-starter-actuator')
-	compile('org.springframework.boot:spring-boot-starter-web')
-	compile('org.springframework.cloud:spring-cloud-starter-netflix-eureka-client')
-	//compile('org.springframework.cloud:spring-cloud-starter-netflix-hystrix')
-	compile('org.springframework.cloud:spring-cloud-starter-netflix-ribbon')
-	compile('org.springframework.cloud:spring-cloud-starter-openfeign')  
-	compile('io.github.openfeign:feign-httpclient')  // Feign doesn't support PATCH http method. This dependency will resolve this. 
-	runtime('org.springframework.boot:spring-boot-devtools')
-	testCompile('org.springframework.boot:spring-boot-starter-test')
-	testCompile ("org.spockframework:spock-core:${spockVersion}")
-	testCompile ("org.spockframework:spock-spring:${spockVersion}")
-	testCompile 'io.rest-assured:rest-assured:3.1.0'
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-hystrix'
+	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-ribbon'
+	implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+	implementation 'io.github.openfeign:feign-httpclient'  // Feign doesn't support PATCH http method. This dependency will resolve this.
+	compileOnly 'org.projectlombok:lombok'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	runtimeOnly 'com.h2database:h2'
+	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+	testImplementation "org.spockframework:spock-core:${spockVersion}"
+	testImplementation "org.spockframework:spock-spring:${spockVersion}"
+	testImplementation "io.rest-assured:rest-assured:${restAssuredVersion}"
 }
-
 dependencyManagement {
 	imports {
 		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
 	}
+}
+test {
+	useJUnitPlatform()
 }
