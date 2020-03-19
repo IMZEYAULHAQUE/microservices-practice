@@ -27,3 +27,48 @@ feign:
       url: http://account-service
 #  hystrix:
 #    enabled: true
+
+#Actuator related properties
+#In order to access the actuator endpoints using HTTP, we need to both enable and expose them.
+#By default, all endpoints but /shutdown are enabled.  Only the /health and /info endpoints are exposed by default.
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - auditevents
+          - beans
+          - caches
+          - conditions
+          - configprops
+          - env
+          - flyway
+          - health
+          - httptrace
+          - info
+          - integrationgraph
+          - loggers
+          - liquibase
+          - metrics
+          - mappings
+          - scheduledtasks
+          - sessions
+          - shutdown
+          - threaddump
+          - zeyaul
+          # If your application is a web application (Spring MVC, Spring WebFlux, or Jersey), you can use the following additional endpoints
+          - heapdump
+          - jolokia
+          - logfile
+          - prometheus
+        exclude:
+          - jolokia
+          - prometheus
+      base-path: /actuator-management
+  endpoint:
+    health:
+      show-details: ALWAYS
+    shutdown:
+      enabled: true
+    jolokia:
+      enabled: false

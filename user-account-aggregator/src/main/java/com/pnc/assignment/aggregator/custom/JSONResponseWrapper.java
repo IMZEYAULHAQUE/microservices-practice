@@ -10,6 +10,9 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
 import com.pnc.assignment.aggregator.model.ExceptionData;
 
+/**
+ * This can be used to intercept and audit log for response.
+ */
 @RestControllerAdvice
 public class JSONResponseWrapper implements ResponseBodyAdvice<Object> {
 
