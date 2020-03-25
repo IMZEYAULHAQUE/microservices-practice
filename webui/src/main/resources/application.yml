@@ -1,0 +1,13 @@
+
+
+server:
+  port: 8071
+  servlet:
+    context-path: /webui
+
+spring:
+  security:
+    user:
+      name: zeyaul
+      password: zeyaul
+
