@@ -66,6 +66,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 					.and()
 					.exceptionHandling()
 					.and()
+					// reason for using STATELESS is for not maintaining session at server side bcz jwt contain all we need (it is a VALUE token).
 					.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
 			http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
