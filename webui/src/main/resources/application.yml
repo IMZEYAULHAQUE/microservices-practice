@@ -5,9 +5,55 @@ server:
   servlet:
     context-path: /webui
 
+#spring:
+#  security:
+#    user:
+#      name: zeyaul
+#      password: zeyaul
+
 spring:
-  security:
-    user:
-      name: zeyaul
-      password: zeyaul
+  # Database Settings
+  datasource:
+    url: jdbc:h2:mem:webui-app;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    platform: h2
+    username: sa
+    password:
+    driverClassName: org.h2.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        show_sql: true
+        use_sql_comments: true
+        format_sql: true
+  # H2 Settings
+  h2:
+    console:
+      enabled: true
+      path: /console
+      settings:
+        trace: false
+        web-allow-others: false
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+  mvc:
+    throw-exception-if-no-handler-found: true
+  resources:
+    add-mappings: false
+    #Above both property setting should go together.
+    #by default Spring maps unknown urls to /**, so there really never is "no handler found". To disable the unknown url mapping to /**, you need
+
+logging:
+  level:
+    org:
+      springframework: DEBUG
+        #web: DEBUG
+      hibernate: ERROR
+
+security:
+  authenticationType: JPA
+
 

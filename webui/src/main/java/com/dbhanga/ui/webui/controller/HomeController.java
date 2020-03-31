@@ -8,6 +8,17 @@ public class HomeController {
 
 	@GetMapping("/")
 	public String home() {
-		return "<b>Welcome Zeyaul</b>";
+		return "<b>Welcome Guest!!</b>";
 	}
+
+	@GetMapping("/user")
+	public String user() {
+		return "<b>Welcome User!!</b>";
+	}
+
+	@GetMapping("/admin")
+	public String admin() {
+		return "<b>Welcome Admin!!</b>";
+	}
+
 }
